@@ -11,12 +11,17 @@ def print_banner():
     banner = r"""
                           __             __    __
     _________  ___  _____/ /__________ _/ /___/ /
-   / ___/ __ \/ _ \/ ___/ __/ ___/ __ `/ / __  / 
+   / ___/ __ \\/ _ \\/ ___/ __/ ___/ __ `/ / __  / 
   (__  ) /_/ /  __/ /__/ /_/ /  / /_/ / / /_/ /  
- /____/ .___/\___/\___/\__/\__/_/   \__,_/_/\__,_/   
+ /____/ .___/\\___/\\___/\\__/\\__/_/   \\__,_/_/\\__,_/   
      /_/                                          
     """
     print(color_text(banner, 'yellow'))
+    
+    # Menambahkan title atau keterangan setelah banner
+    title = "SpectraLD - RLD Edition | Real-time Username OSINT"
+    print(color_text(title, 'green'))  # Tampilkan title setelah banner
+
 
 def main():
     print_banner()
