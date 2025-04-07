@@ -53,14 +53,11 @@ def run_username_check(username, verbose=False):
     ]
     for dork in dorks:
         url = f"https://www.google.com/search?q={requests.utils.quote(dork)}"
-        line = f"    🔎 {url}"
+        line = f"    {url}"
         print(line)
         output_lines.append(line)
 
-    save_path = os.path.join("hasil", f"{username}.txt")
-    os.makedirs("hasil", exist_ok=True)
-    with open(save_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(output_lines))
+    return output_lines  # Pastikan mengembalikan list hasil
 
 def extract_links(text):
     return re.findall(r"https?://\S+", text)
@@ -68,9 +65,9 @@ def extract_links(text):
 def print_reverse_image_links(img_url):
     links = [
         f"    ↳ Reverse Image:",
-        f"       🔍 Yandex : https://yandex.com/images/search?rpt=imageview&url={img_url}",
-        f"       🔍 Google : https://www.google.com/searchbyimage?image_url={img_url}",
-        f"       🔍 Bing   : https://www.bing.com/images/search?q=imgurl:{img_url}&view=detailv2"
+        f"       Yandex : https://yandex.com/images/search?rpt=imageview&url={img_url}",
+        f"       Google : https://www.google.com/searchbyimage?image_url={img_url}",
+        f"       Bing   : https://www.bing.com/images/search?q=imgurl:{img_url}&view=detailv2"
     ]
     for line in links:
         print(line)
@@ -135,3 +132,29 @@ def get_profile_info(site, username, url):
         pass
 
     return lines
+
+def main():
+    print_banner()
+    parser = argparse.ArgumentParser(description="SpectraLD RLD - Investigative Username OSINT Tool")
+    parser.add_argument("--username", help="Username(s) yang ingin dicari", required=True, nargs='+')
+    parser.add_argument("--verbose", action="store_true", help="Tampilkan metadata jika tersedia")
+    parser.add_argument("--fast", action="store_true", help="Aktifkan multithread untuk kecepatan maksimal")
+    args = parser.parse_args()
+
+    all_output_lines = []  # Menyimpan semua hasil dalam satu file
+
+    for username in args.username:
+        print(f"\n--- Mencari untuk username: {username} ---")
+        username_output_lines = run_username_check(username, verbose=args.verbose)
+        all_output_lines.extend(username_output_lines)
+
+    # Menyimpan semua hasil di satu file
+    save_path = os.path.join("hasil", "all_results.txt")
+    os.makedirs("hasil", exist_ok=True)
+    with open(save_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(all_output_lines))
+
+    print(f"\n[✓] Semua hasil disimpan di: hasil/all_results.txt")
+
+if __name__ == "__main__":
+    main()
