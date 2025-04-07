@@ -1,0 +1,12 @@
+{
+  "Instagram": "https://www.instagram.com/{username}",
+  "GitHub": "https://github.com/{username}",
+  "TikTok": "https://www.tiktok.com/@{username}",
+  "Reddit": "https://www.reddit.com/user/{username}",
+  "Medium": "https://medium.com/@{username}",
+  "Pinterest": "https://www.pinterest.com/{username}",
+  "Flickr": "https://www.flickr.com/people/{username}",
+  "Kaskus": "https://www.kaskus.co.id/profile/{username}",
+  "Kompasiana": "https://www.kompasiana.com/{username}",
+  "LinkedIn": "https://www.linkedin.com/in/{username}"
+}
